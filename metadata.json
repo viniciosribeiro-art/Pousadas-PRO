@@ -1,0 +1,5 @@
+{
+  "name": "PousadaPro - Sistema de Gerenciamento",
+  "description": "Um sistema de gerenciamento de pousada completo, moderno e responsivo para administrar reservas, hóspedes, quartos e finanças com facilidade. Interface intuitiva construída com React e Tailwind CSS.",
+  "requestFramePermissions": []
+}

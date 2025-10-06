@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PousadaPro - Sistema de Gerenciamento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      function hexToRgb(hex) {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}` : null;
+      }
+
+      // Default colors
+      let primaryColor = '#0D47A1';
+      let secondaryColor = '#1976D2';
+
+      try {
+        const storedConfig = localStorage.getItem('pousadaConfig');
+        if (storedConfig) {
+          const config = JSON.parse(storedConfig);
+          primaryColor = config.aparencia?.corPrimaria || primaryColor;
+          secondaryColor = config.aparencia?.corSecundaria || secondaryColor;
+        }
+      } catch (e) {
+        console.error('Could not load theme colors from localStorage', e);
+      }
+
+      const root = document.documentElement;
+      root.style.setProperty('--color-brand-primary', hexToRgb(primaryColor));
+      root.style.setProperty('--color-brand-secondary', hexToRgb(secondaryColor));
+
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand-primary': 'rgb(var(--color-brand-primary) / <alpha-value>)',
+              'brand-secondary': 'rgb(var(--color-brand-secondary) / <alpha-value>)',
+              'brand-accent': '#42A5F5',
+              'brand-light': '#E3F2FD',
+              'status-disponivel': '#4CAF50',
+              'status-ocupado': '#F44336',
+              'status-manutencao': '#FFC107',
+              'status-limpeza': '#2196F3',
+            },
+          }
+        }
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "recharts": "https://aistudiocdn.com/recharts@^3.2.1"
+  }
+}
+</script>
+</head>
+  <body class="bg-gray-100 antialiased">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
